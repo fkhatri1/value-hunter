@@ -1,0 +1,13 @@
+Creating self-signed certificate to allow VSCode to run http requests on remote server-
+    # create key and cert
+    openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+    # combine key and cert
+    openssl pkcs12 -inkey key.pem -in certificate.pem -export -out certificate.p12
+
+    Downloaded certificate.p12 to my local computer, and then adding to Chrome: chrome://settings/privacy > Manage certificates > Import > Select and import certificate.p12 > Restarting VS Code.
+
+    From https://stackoverflow.com/questions/61282651/get-vs-code-python-extension-to-connect-to-jupyter-running-on-remote-aws-emr-mas
+
+
+from within py39
+nohup jupyter notebook --no-browser --port 8888 --allow-root 1>>~/jupyter.log 2>>~/jupyter.log &
