@@ -65,7 +65,7 @@ while task != -1:
                         'signal_date': s
                     })
                     _signal_data.update(perf)
-                    signals.append(_signal_data)
+                    signals = signals.append(_signal_data)
 
         with open(f"{config['config']['data']}/signal_analysis.pickle", 'wb') as f:
             pickle.dump(signals, f, protocol=pickle.HIGHEST_PROTOCOL)

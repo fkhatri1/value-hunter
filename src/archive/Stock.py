@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 from datetime import date, datetime, timedelta
 from src.utils import get_config, Logger
-from src.api import Profile, get_price_data, get_market_cap, get_earnings_events, get_profile
+from API import Profile, get_price_data, get_market_cap, get_earnings_events, get_profile
 
 class Stock:
     def __init__(self, symbol):
@@ -47,7 +47,7 @@ class Stock:
         df['num_stdev_lag2'] = df['num_stdev'].shift(2)
 
     def find_signal(self):
-        rsi_threshold = 21
+        rsi_threshold = 27
         last_day = self.price_data.iloc[-1]
         if (last_day['rsi'] > rsi_threshold and last_day['rsi_lag1'] < rsi_threshold and last_day['rsi_lag2'] < rsi_threshold):
             return True
