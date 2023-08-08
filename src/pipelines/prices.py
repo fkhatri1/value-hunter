@@ -20,8 +20,9 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
-START_DATE = "2019-01-01"
+START_DATE = "2005-01-01"
 DATA_PATH = "/home/ubuntu/data/stocks"
+
 
 def get_symbols() -> List[str]:
     # S&P 500
@@ -34,7 +35,7 @@ def get_symbols() -> List[str]:
     df = wr.s3.read_csv("s3://faysal/stocks/symbols/sp600.csv")
     symbols.extend(df["Symbol"].values)
 
-    return symbols
+    return [s.upper() for s in symbols if isinstance(s, str)]
 
 
 def fetch_prices(symbols: List[str]) -> None:
@@ -42,11 +43,11 @@ def fetch_prices(symbols: List[str]) -> None:
     stock = Stock.Stock()
 
     for i, s in enumerate(symbols):
-        logger.info(f"Fetching prices for {s}. {i} of {len(symbols)}")
-        s = s.upper()
-
+        logger.info(f"Fetching Prices for {s}. {i} of {len(symbols)}")
         try:
-            loaded_prices = pd.read_csv(f"{DATA_PATH}/prices/{s}.csv").set_index(["date"])
+            loaded_prices = pd.read_csv(f"{DATA_PATH}/prices/{s}.csv").set_index(
+                ["date"]
+            )
             s_start = loaded_prices.index.min()
             s_end = loaded_prices.index.max()
 
@@ -61,12 +62,12 @@ def fetch_prices(symbols: List[str]) -> None:
 
         prices.to_csv(f"{DATA_PATH}/prices/{s}.csv", index=True)
 
+
 def fetch_cash_flow_statements(symbols: List[str]) -> None:
     """Fetches cf statements and stores locally"""
-    stock = Stock.Stock()    
+    stock = Stock.Stock()
     for i, s in enumerate(symbols):
         logger.info(f"Fetching Cash Flow for {s}. {i} of {len(symbols)}")
-        s = s.upper()
         try:
             cf = stock.get_historical_cash_flow_statement(s)
         except Stock.NoDataException:
@@ -76,13 +77,13 @@ def fetch_cash_flow_statements(symbols: List[str]) -> None:
 
         filtered.to_csv(f"{DATA_PATH}/cash_flow/{s}.csv", index=True)
 
+
 def fetch_balance_sheet_statements(symbols: List[str]) -> None:
     """Fetches balance sheet statements and stores locally"""
     stock = Stock.Stock()
     for i, s in enumerate(symbols):
         logger.info(f"Fetching Balance Sheet for {s}. {i} of {len(symbols)}")
         try:
-            s = s.upper()
             cf = stock.get_historical_balance_sheet_statement(s)
         except Stock.NoDataException:
             continue
@@ -91,11 +92,48 @@ def fetch_balance_sheet_statements(symbols: List[str]) -> None:
 
         filtered.to_csv(f"{DATA_PATH}/balance_sheet/{s}.csv", index=True)
 
+
+def fetch_income_statements(symbols: List[str]) -> None:
+    """Fetches balance sheet statements and stores locally"""
+    stock = Stock.Stock()
+    for i, s in enumerate(symbols):
+        logger.info(f"Fetching Income Statement for {s}. {i} of {len(symbols)}")
+        try:
+            cf = stock.get_historical_income_statement(s)
+        except Stock.NoDataException:
+            continue
+
+        filtered = cf[cf["calendarYear"] > START_DATE[0:4]].sort_index()
+
+        filtered.to_csv(f"{DATA_PATH}/income/{s}.csv", index=True)
+
+
+def fetch_market_cap(symbols: List[str]) -> None:
+    """Fetches balance sheet statements and stores locally"""
+    stock = Stock.Stock()
+    for i, s in enumerate(symbols):
+        logger.info(f"Fetching Market Cap for {s}. {i} of {len(symbols)}")
+        try:
+            cf = stock.get_historical_income_statement(s)
+        except Stock.NoDataException:
+            continue
+
+        filtered = cf[cf.index > START_DATE].sort_index()
+
+        filtered.to_csv(f"{DATA_PATH}/market_cap/{s}.csv", index=True)
+
+
 def main():
     symbols = get_symbols()
     logger.info(f"Got {len(symbols)} symbols.")
 
-    fetch_funcs = [fetch_prices, fetch_cash_flow_statements, fetch_balance_sheet_statements]
+    fetch_funcs = [
+        fetch_prices,
+        fetch_cash_flow_statements,
+        fetch_balance_sheet_statements,
+        fetch_income_statements,
+        fetch_market_cap,
+    ]
 
     # instantiating process with arguments
     procs = []
