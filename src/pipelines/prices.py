@@ -9,6 +9,7 @@ import awswrangler as wr
 
 import logging
 import sys
+import time
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -34,6 +35,10 @@ def get_symbols() -> List[str]:
     # S&P 600 SmallCaps
     df = wr.s3.read_csv("s3://faysal/stocks/symbols/sp600.csv")
     symbols.extend(df["Symbol"].values)
+    # ADRs
+    df = wr.s3.read_csv("s3://faysal/stocks/symbols/ADRs.csv")
+    df = df[df.Country == "United States"]
+    symbols.extend(df["Symbol"].values)
 
     return [s.upper() for s in symbols if isinstance(s, str)]
 
@@ -45,23 +50,13 @@ def fetch_prices(symbols: List[str]) -> None:
     for i, s in enumerate(symbols):
         logger.info(f"Fetching Prices for {s}. {i} of {len(symbols)}")
         try:
-            loaded_prices = pd.read_csv(f"{DATA_PATH}/prices/{s}.csv").set_index(
-                ["date"]
-            )
-            s_start = loaded_prices.index.min()
-            s_end = loaded_prices.index.max()
-
-            early_backfill = stock.get_historical_ohlc(s, start=START_DATE, end=s_start)
-            latest_rows = stock.get_historical_ohlc(s, start=s_end)
-
-            prices = pd.concat(
-                [early_backfill, loaded_prices, latest_rows]
-            ).drop_duplicates()
-        except FileNotFoundError:
             prices = stock.get_historical_ohlc(s, START_DATE)
-
+        except Exception as e:
+            print(e)
+            continue
+        
         prices.to_csv(f"{DATA_PATH}/prices/{s}.csv", index=True)
-
+        time.sleep(1)
 
 def fetch_cash_flow_statements(symbols: List[str]) -> None:
     """Fetches cf statements and stores locally"""
@@ -76,7 +71,7 @@ def fetch_cash_flow_statements(symbols: List[str]) -> None:
         filtered = cf[cf["calendarYear"] > START_DATE[0:4]].sort_index()
 
         filtered.to_csv(f"{DATA_PATH}/cash_flow/{s}.csv", index=True)
-
+        time.sleep(1)
 
 def fetch_balance_sheet_statements(symbols: List[str]) -> None:
     """Fetches balance sheet statements and stores locally"""
@@ -91,7 +86,7 @@ def fetch_balance_sheet_statements(symbols: List[str]) -> None:
         filtered = cf[cf["calendarYear"] > START_DATE[0:4]].sort_index()
 
         filtered.to_csv(f"{DATA_PATH}/balance_sheet/{s}.csv", index=True)
-
+        time.sleep(1)
 
 def fetch_income_statements(symbols: List[str]) -> None:
     """Fetches balance sheet statements and stores locally"""
@@ -106,7 +101,7 @@ def fetch_income_statements(symbols: List[str]) -> None:
         filtered = cf[cf["calendarYear"] > START_DATE[0:4]].sort_index()
 
         filtered.to_csv(f"{DATA_PATH}/income/{s}.csv", index=True)
-
+        time.sleep(1)
 
 def fetch_market_cap(symbols: List[str]) -> None:
     """Fetches balance sheet statements and stores locally"""
@@ -114,14 +109,14 @@ def fetch_market_cap(symbols: List[str]) -> None:
     for i, s in enumerate(symbols):
         logger.info(f"Fetching Market Cap for {s}. {i} of {len(symbols)}")
         try:
-            cf = stock.get_historical_income_statement(s)
+            cf = stock.get_historical_market_cap(s)
         except Stock.NoDataException:
             continue
 
         filtered = cf[cf.index > START_DATE].sort_index()
 
         filtered.to_csv(f"{DATA_PATH}/market_cap/{s}.csv", index=True)
-
+        time.sleep(1)
 
 def main():
     symbols = get_symbols()
