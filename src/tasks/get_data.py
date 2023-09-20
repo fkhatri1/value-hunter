@@ -4,16 +4,34 @@ from OutsideWorld.Finance import Stock
 import pandas as pd
 import awswrangler as wr
 import time
-import datetime 
+import datetime
+
 
 class DataUnavailableException(Exception):
     pass
 
-# prices: all 
-CASH_FLOW_COLS = ["symbol", "reportedCurrency" ,"freeCashFlow" ,"capitalExpenditure" ,"debtRepayment" ,"commonStockRepurchased", "dividendsPaid"]
-INCOME_COLS = ["symbol", "revenue", "costOfRevenue", "ebitda" ,"netIncome" ,"eps"]
-BALANCE_SHEET_COLS = ["symbol",  "cashAndCashEquivalents" ,"totalAssets" ,"goodwillAndIntangibleAssets" ,"totalLiabilities" , "retainedEarnings"]
+
+# prices: all
+CASH_FLOW_COLS = [
+    "symbol",
+    "reportedCurrency",
+    "freeCashFlow",
+    "capitalExpenditure",
+    "debtRepayment",
+    "commonStockRepurchased",
+    "dividendsPaid",
+]
+INCOME_COLS = ["symbol", "revenue", "costOfRevenue", "ebitda", "netIncome", "eps"
+BALANCE_SHEET_COLS = [
+    "symbol",
+    "cashAndCashEquivalents",
+    "totalAssets",
+    "goodwillAndIntangibleAssets",
+    "totalLiabilities",
+    "retainedEarnings",
+]
 # market_cap: all
+
 
 def normalize_dates(dts: List[datetime.datetime]):
     normal_dts = []
@@ -27,11 +45,12 @@ def normalize_dates(dts: List[datetime.datetime]):
         elif d.month == 12:
             normal_dts.append(datetime.date(year=d.year, month=12, day=31))
         elif d.month == 1:
-            normal_dts.append(datetime.date(year=d.year-1, month=12, day=31))
+            normal_dts.append(datetime.date(year=d.year - 1, month=12, day=31))
         else:
             raise ValueError(f"Cannot interpret date: {d}")
 
     return pd.to_datetime(normal_dts)
+
 
 def fetch_data(s: str, start_date: str) -> None:
     true_start_date = pd.to_datetime(start_date)
@@ -70,13 +89,17 @@ def fetch_data(s: str, start_date: str) -> None:
         # merge
         df = prices.join(mc, lsuffix="", rsuffix="r")
 
-        df1 = pd.merge_asof(df, bal, left_index=True, right_index=True, suffixes=["","_reported"])
-        df2 = pd.merge_asof(df1, cf, left_index=True, right_index=True, suffixes=["","_reported"])
-        df3 = pd.merge_asof(df2, income, left_index=True, right_index=True, suffixes=["","_reported"])
+        df1 = pd.merge_asof(
+            df, bal, left_index=True, right_index=True, suffixes=["", "_reported"]
+        )
+        df2 = pd.merge_asof(
+            df1, cf, left_index=True, right_index=True, suffixes=["", "_reported"]
+        )
+        df3 = pd.merge_asof(
+            df2, income, left_index=True, right_index=True, suffixes=["", "_reported"]
+        )
 
         return df3.loc[true_start_date:]
 
     except Exception as e:
         raise DataUnavailableException(e)
-
-
