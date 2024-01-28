@@ -1,0 +1,100 @@
+test_date = 11/30
+today = 1/12
+
+SEM: 30 trading day gain 17.08
+BCAL: 30 trading day gain 17.21
+BCSF: 30 trading day gain 1.29
+MMSI: 30 trading day gain 10.35
+EPC: 30 trading day gain 7.51
+MYX: 30 trading day gain 7.51
+DE: 30 trading day gain 7.24
+IBM: 30 trading day gain 3.34
+EXTR: 30 trading day gain 0.84
+DIAX: 30 trading day gain 0.84
+WHD: 30 trading day gain -4.73
+TEX: 30 trading day gain 15.15
+SAIC: 30 trading day gain 8.18
+COLB: 30 trading day gain 10.99
+PWR: 30 trading day gain 7.65
+ALE: 30 trading day gain 9.93
+INGR: 30 trading day gain 7.01
+REYN: 30 trading day gain 3.93
+ACP: 30 trading day gain 3.93
+PWSC: 30 trading day gain 3.09
+C7C1: 30 trading day gain 3.09
+NABL: 30 trading day gain 12.13
+PRI: 30 trading day gain 3.45
+NBHC: 30 trading day gain 5.79
+BV: 30 trading day gain 8.38
+CMI: 30 trading day gain 5.71
+FCFS: 30 trading day gain -2.14
+M4I: 30 trading day gain -2.14
+ALTR: 30 trading day gain 15.1
+VC: 30 trading day gain -3.03
+ABNB: 30 trading day gain 9.15
+FBMS: 30 trading day gain 6.24
+ARMK: 30 trading day gain 3.54
+ELF: 30 trading day gain 34.15
+CPB: 30 trading day gain 7.91
+CCSI: 30 trading day gain 8.71
+OLLI: 30 trading day gain -2.43
+AMK: 30 trading day gain 17.16
+PCAR: 30 trading day gain 2.61
+ENS: 30 trading day gain 11.12
+6MK: 30 trading day gain 11.12
+GBDC: 30 trading day gain 2.53
+DBRG: 30 trading day gain 4.35
+LOW: 30 trading day gain 9.83
+MCY: 30 trading day gain 6.12
+ORRF: 30 trading day gain 19.47
+CAKE: 30 trading day gain 3.6
+AGCO: 30 trading day gain 5.42
+ARCC: 30 trading day gain 2.6
+NVV1: 30 trading day gain 2.6
+
+
+
+\PFC: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: -8.39
+NHI: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 1.79
+RMR: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 12.82
+CMG: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 2.59
+HOMB: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: -1.47
+SMLR: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 0.5
+ROP: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 3.4
+BBN1: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 3.4
+SKWD: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 17.56
+RC: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 5.11
+EIG: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 5.65
+HAE: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 7.66
+UDR: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: -0.65
+PGR: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 9.32
+BLBD: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: -10.05
+OBDC: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 3.27
+CFG: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 2.88
+RCL: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: -3.17
+CPRX: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: -15.53
+SBAC: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: -1.44
+STT: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 5.83
+NOW: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 1.55
+XPRO: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 2.6
+COLL: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: -6.18
+USFD: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 0.9
+HYT: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 0.9
+PTVE: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: -0.24
+AGCO: 20 trading day 2023-08-22 00:00:00 to 2023-09-20 00:00:00 gain: 1.93
+
+
+AMGN: 40 trading day 2023-06-09 00:00:00 to 2023-08-08 00:00:00 gain: 19.44
+BKR: 40 trading day 2023-06-09 00:00:00 to 2023-08-08 00:00:00 gain: 17.62
+NESR: 40 trading day 2023-06-09 00:00:00 to 2023-08-08 00:00:00 gain: 43.3
+OMI: 40 trading day 2023-06-09 00:00:00 to 2023-08-08 00:00:00 gain: -7.91
+LTC: 40 trading day 2023-06-09 00:00:00 to 2023-08-08 00:00:00 gain: 3.41
+MPC: 40 trading day 2023-06-09 00:00:00 to 2023-08-08 00:00:00 gain: 25.46
+MSGS: 40 trading day 2023-06-09 00:00:00 to 2023-08-08 00:00:00 gain: 17.68
+CHDN: 40 trading day 2023-06-09 00:00:00 to 2023-08-08 00:00:00 gain: 74.33
+
+KRT: 30 trading day 2023-03-29 00:00:00 to 2023-06-09 00:00:00 gain: 28.0
+EBF: 30 trading day 2023-03-29 00:00:00 to 2023-06-09 00:00:00 gain: -1.28
+MTDR: 30 trading day 2023-03-29 00:00:00 to 2023-06-09 00:00:00 gain: 6.72
+VECO: 30 trading day 2023-03-29 00:00:00 to 2023-06-09 00:00:00 gain: 20.76
+FOX: 30 trading day 2023-03-29 00:00:00 to 2023-06-09 00:00:00 gain: 2.88
