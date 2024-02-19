@@ -11,3 +11,24 @@ Creating self-signed certificate to allow VSCode to run http requests on remote 
 
 from within py39
 nohup jupyter notebook --no-browser --port 8888 --allow-root 1>>~/jupyter.log 2>>~/jupyter.log &
+
+wget
+
+libssl-dev
+zlib1g-dev
+libncurses5-dev
+libgdbm-dev
+libnss3-dev
+libsqlite3-dev
+libreadline-dev
+libffi-dev
+libbz2-dev
+libexpat1-dev
+liblzma-dev
+tk-dev
+uuid-dev
+libssl-dev
+xz-utils
+libtinfo-dev
+
+oi "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"
