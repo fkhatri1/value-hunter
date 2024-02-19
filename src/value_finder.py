@@ -29,7 +29,7 @@ def get_symbols():
     screener = Screener()
     criteria: ScreeningCriteria = ScreeningCriteria(
         country = "US",
-        min_market_cap = 250000000,
+        min_market_cap = 5_000_000_000,
         min_volume = None,
         min_dividend = None,
         max_beta = None,
@@ -74,30 +74,20 @@ def find_matches(symbols):
         except Exception as e:
             continue
 
-        # if  test_day["atoi_lag_1"] > 0 and \
-        #     test_day["atoi"] > 0 and \
-        #     test_day["atoi_qoq_growth"] > 0.05 and \
-        #     test_day["owners_earnings_lag_1"] > 0 and \
-        #     test_day["owners_earnings"] > 0 and \
-        #     test_day["owners_earnings_qoq_growth"] > 0.05 and \
-        #     test_day["net_margin"] > 0.05 and \
-        #     test_day["roic"] > 0.15 and \
-        #     test_day["totalStockholdersEquity"] > 0 and \
-        #     test_day["stdevs"] < -1.4:
-
         if  test_day["atoi_lag_1"] > 0 and \
             test_day["atoi"] > 0 and \
             test_day["atoi_qoq_growth"] > -0.05 and \
             test_day["owners_earnings_lag_1"] > 0 and \
             test_day["owners_earnings"] > 0 and \
-            test_day["owners_earnings_qoq_growth"] > 0.08 and \
+            test_day["owners_earnings_qoq_growth"] > 0.11 and \
+            test_day["owners_earnings_qoq_growth_lag_1"] > -0.11 and \
             test_day["net_margin"] > 0.05 and \
             test_day["net_margin_growth"] > 0 and \
             test_day["net_margin_growth_lag_1"] > 0 and \
             test_day["roic"] > 0.15 and \
             test_day["totalStockholdersEquity"] > 0 and \
-            test_day["stdevs"] < -0.51 and \
-            test_day["ratio_peg"] < 0.5:
+            test_day["ratio_peg"] < 1 and \
+            test_day["stdevs"] < -1.25:
             
             # match found
             logger.info(f"Found a match: {s}")

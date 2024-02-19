@@ -19,7 +19,6 @@ def fetch_data(s, start_date):
     # derived metrics
     df["enterpriseValue"] = df["marketCap"] + df["netDebt"]
     df["cash"] = df["totalDebt"] - df["netDebt"]
-    df["eps_growth_annual"] = (df["eps"] / df["eps"].shift(4)) * 100
     df["gross_margin"] = df["grossProfit"] / df["revenue"]
     df["oe_margin"] = df["owners_earnings"] / df["revenue"]
     df["fcf_margin"] = df["freeCashFlow"] / df["revenue"]
